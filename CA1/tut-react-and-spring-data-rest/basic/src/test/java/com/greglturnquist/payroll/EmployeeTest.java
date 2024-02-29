@@ -116,10 +116,6 @@ class EmployeeTest {
     @Test
     public void testEmployeeConstructorAcceptsZeroJobYears() {
         // Arrange
-        String firstName = "John";
-        String lastName = "Doe";
-        String description = "Developer";
-        String jobTitle = "Software Engineer";
         int jobYears = 0;
         // Act and Assert
         assertDoesNotThrow(() -> {
