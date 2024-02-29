@@ -33,14 +33,16 @@ public class Employee {
 	private String lastName;
 	private String description;
 	private String jobTitle;
+	private int jobYears;
 
 	private Employee() {}
 
-	public Employee(String firstName, String lastName, String description, String jobTitle) {
+	public Employee(String firstName, String lastName, String description, String jobTitle, int jobYears) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.description = description;
 		this.jobTitle = jobTitle;
+		this.jobYears = jobYears;
 	}
 
 	@Override
@@ -52,7 +54,8 @@ public class Employee {
 			Objects.equals(firstName, employee.firstName) &&
 			Objects.equals(lastName, employee.lastName) &&
 			Objects.equals(description, employee.description) &&
-			Objects.equals(jobTitle, employee.jobTitle);
+			Objects.equals(jobTitle, employee.jobTitle) &&
+			Objects.equals(jobYears, employee.jobYears);
 	}
 
 	@Override
@@ -92,11 +95,21 @@ public class Employee {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 	public String getJobTitle() {
 		return jobTitle;
 	}
+
 	public void setJobTitle(String jobTitle) {
 		this.jobTitle = jobTitle;
+	}
+
+	public int getJobYears() {
+		return jobYears;
+	}
+
+	public void setJobYears(int jobYears) {
+		this.jobYears = jobYears;
 	}
 
 	@Override
@@ -107,6 +120,7 @@ public class Employee {
 			", lastName='" + lastName + '\'' +
 			", description='" + description + '\'' +
 			", jobTitle='" + jobTitle + '\'' +
+			", jobYears=" + jobYears +
 			'}';
 	}
 }
