@@ -38,6 +38,9 @@ public class Employee {
 	private Employee() {}
 
 	public Employee(String firstName, String lastName, String description, String jobTitle, int jobYears) {
+		if (!validStringParameters(firstName) || !validStringParameters(lastName) || !validStringParameters(description) || !validStringParameters(jobTitle) || !validJobYears(jobYears)) {
+			throw new IllegalArgumentException("Invalid parameters");
+		}
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.description = description;
@@ -122,6 +125,14 @@ public class Employee {
 			", jobTitle='" + jobTitle + '\'' +
 			", jobYears=" + jobYears +
 			'}';
+	}
+
+	private boolean validStringParameters(String x) {
+		return x != null && !x.isEmpty();
+	}
+
+	private boolean validJobYears(int x) {
+		return x >= 0;
 	}
 }
 // end::code[]
