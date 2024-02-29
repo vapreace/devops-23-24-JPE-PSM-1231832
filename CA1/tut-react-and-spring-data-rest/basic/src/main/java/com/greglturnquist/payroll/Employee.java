@@ -80,6 +80,9 @@ public class Employee {
 	}
 
 	public void setFirstName(String firstName) {
+		if (!validStringParameters(firstName)) {
+			throw new IllegalArgumentException("Invalid parameters");
+		}
 		this.firstName = firstName;
 	}
 
@@ -88,6 +91,9 @@ public class Employee {
 	}
 
 	public void setLastName(String lastName) {
+		if (!validStringParameters(lastName)) {
+			throw new IllegalArgumentException("Invalid parameters");
+		}
 		this.lastName = lastName;
 	}
 
@@ -96,6 +102,9 @@ public class Employee {
 	}
 
 	public void setDescription(String description) {
+		if (!validStringParameters(description)) {
+			throw new IllegalArgumentException("Invalid parameters");
+		}
 		this.description = description;
 	}
 
@@ -104,6 +113,9 @@ public class Employee {
 	}
 
 	public void setJobTitle(String jobTitle) {
+		if (!validStringParameters(jobTitle)) {
+			throw new IllegalArgumentException("Invalid parameters");
+		}
 		this.jobTitle = jobTitle;
 	}
 
@@ -112,6 +124,9 @@ public class Employee {
 	}
 
 	public void setJobYears(int jobYears) {
+		if (!validJobYears(jobYears)) {
+			throw new IllegalArgumentException("Invalid parameters");
+		}
 		this.jobYears = jobYears;
 	}
 
