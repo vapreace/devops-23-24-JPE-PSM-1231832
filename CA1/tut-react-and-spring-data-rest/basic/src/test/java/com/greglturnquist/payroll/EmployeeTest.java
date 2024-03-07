@@ -126,6 +126,16 @@ class EmployeeTest {
     }
 
     @Test
+    public void testEmployeeConstructorThrowsExceptionWhenEmailIsInvalid() {
+        // Arrange
+        String email = "invalidEmail";
+        // Act and Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Employee(this.firstName, this.lastName, this.description, this.jobTitle, this.jobYears, email);
+        });
+    }
+
+    @Test
     public void testEmployeeConstructorWithValidParameters() {
         // Act and Assert
         assertDoesNotThrow(() -> {
@@ -317,6 +327,16 @@ class EmployeeTest {
     public void testSetEmailThrowsExceptionWhenEmailIsEmpty() {
         // Arrange
         String email = "";
+        // Act and Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            validEmployee.setEmail(email);
+        });
+    }
+
+    @Test
+    public void testSetEmailThrowsExceptionWhenEmailIsInvalid() {
+        // Arrange
+        String email = "invalidEmail";
         // Act and Assert
         assertThrows(IllegalArgumentException.class, () -> {
             validEmployee.setEmail(email);
