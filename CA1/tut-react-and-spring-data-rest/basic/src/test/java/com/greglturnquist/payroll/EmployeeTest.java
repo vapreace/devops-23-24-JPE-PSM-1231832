@@ -11,6 +11,7 @@ class EmployeeTest {
     private String description;
     private String jobTitle;
     private int jobYears;
+    private String email;
     private Employee validEmployee;
 
     @BeforeEach
@@ -20,14 +21,15 @@ class EmployeeTest {
         description = "Developer";
         jobTitle = "Software Engineer";
         jobYears = 5;
-        validEmployee = new Employee(firstName, lastName, description, jobTitle, jobYears);
+        email = "f_bagins@mail.com";
+        validEmployee = new Employee(firstName, lastName, description, jobTitle, jobYears, email);
     }
 
     @Test
     public void testEmployeeConstructorThrowsExceptionWhenFirstNameIsNull() {
         // Act and Assert
         assertThrows(IllegalArgumentException.class, () -> {
-            new Employee(null, this.lastName, this.description, this.jobTitle, this.jobYears);
+            new Employee(null, this.lastName, this.description, this.jobTitle, this.jobYears, this.email);
         });
     }
 
@@ -37,7 +39,7 @@ class EmployeeTest {
         String firstName = "";
         // Act and Assert
         assertThrows(IllegalArgumentException.class, () -> {
-            new Employee(firstName, this.lastName, this.description, this.jobTitle, this.jobYears);
+            new Employee(firstName, this.lastName, this.description, this.jobTitle, this.jobYears, this.email);
         });
     }
 
@@ -45,7 +47,7 @@ class EmployeeTest {
     public void testEmployeeConstructorThrowsExceptionWhenLastNameIsNull() {
         // Act and Assert
         assertThrows(IllegalArgumentException.class, () -> {
-            new Employee(this.firstName, null, this.description, this.jobTitle, this.jobYears);
+            new Employee(this.firstName, null, this.description, this.jobTitle, this.jobYears, this.email);
         });
     }
 
@@ -55,7 +57,7 @@ class EmployeeTest {
         String lastName = "";
         // Act and Assert
         assertThrows(IllegalArgumentException.class, () -> {
-            new Employee(this.firstName, lastName, this.description, this.jobTitle, this.jobYears);
+            new Employee(this.firstName, lastName, this.description, this.jobTitle, this.jobYears, this.email);
         });
     }
 
@@ -63,7 +65,7 @@ class EmployeeTest {
     public void testEmployeeConstructorThrowsExceptionWhenDescriptionIsNull() {
         // Act and Assert
         assertThrows(IllegalArgumentException.class, () -> {
-            new Employee(this.firstName, this.lastName, null, this.jobTitle, this.jobYears);
+            new Employee(this.firstName, this.lastName, null, this.jobTitle, this.jobYears, this.email);
         });
     }
 
@@ -73,7 +75,7 @@ class EmployeeTest {
         String description = "";
         // Act and Assert
         assertThrows(IllegalArgumentException.class, () -> {
-            new Employee(this.firstName, this.lastName, description, this.jobTitle, this.jobYears);
+            new Employee(this.firstName, this.lastName, description, this.jobTitle, this.jobYears, this.email);
         });
     }
 
@@ -81,7 +83,7 @@ class EmployeeTest {
     public void testEmployeeConstructorThrowsExceptionWhenJobTitleIsNull() {
         // Act and Assert
         assertThrows(IllegalArgumentException.class, () -> {
-            new Employee(this.firstName, this.lastName, this.description, null, this.jobYears);
+            new Employee(this.firstName, this.lastName, this.description, null, this.jobYears, this.email);
         });
     }
 
@@ -91,7 +93,7 @@ class EmployeeTest {
         String jobTitle = "";
         // Act and Assert
         assertThrows(IllegalArgumentException.class, () -> {
-            new Employee(this.firstName, this.lastName, this.description, jobTitle, this.jobYears);
+            new Employee(this.firstName, this.lastName, this.description, jobTitle, this.jobYears, this.email);
         });
     }
 
@@ -101,7 +103,25 @@ class EmployeeTest {
         int jobYears = -1;
         // Act and Assert
         assertThrows(IllegalArgumentException.class, () -> {
-            new Employee(this.firstName, this.lastName, this.description, this.jobTitle, jobYears);
+            new Employee(this.firstName, this.lastName, this.description, this.jobTitle, jobYears, this.email);
+        });
+    }
+
+    @Test
+    public void testEmployeeConstructorThrowsExceptionWhenEmailIsNull() {
+        // Act and Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Employee(this.firstName, this.lastName, this.description, this.jobTitle, this.jobYears, null);
+        });
+    }
+
+    @Test
+    public void testEmployeeConstructorThrowsExceptionWhenEmailIsEmpty() {
+        // Arrange
+        String email = "";
+        // Act and Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Employee(this.firstName, this.lastName, this.description, this.jobTitle, this.jobYears, email);
         });
     }
 
@@ -109,23 +129,23 @@ class EmployeeTest {
     public void testEmployeeConstructorWithValidParameters() {
         // Act and Assert
         assertDoesNotThrow(() -> {
-            new Employee(firstName, lastName, description, jobTitle, jobYears);
+            new Employee(this.firstName, this.lastName, this.description, this.jobTitle, this.jobYears, this.email);
         });
     }
 
     @Test
-    public void testEmployeeConstructorAcceptsZeroJobYears() {
+    public void testEmployeeConstructorValidZeroJobYears() {
         // Arrange
         int jobYears = 0;
         // Act and Assert
         assertDoesNotThrow(() -> {
-            new Employee(firstName, lastName, description, jobTitle, jobYears);
+            new Employee(this.firstName, this.lastName, this.description, this.jobTitle, jobYears, this.email);
         });
     }
 
     @Test
     public void testEqualsTrue() {
-        Employee validEmployee2 = new Employee(firstName, lastName, description, jobTitle, jobYears);
+        Employee validEmployee2 = new Employee(this.firstName, this.lastName, this.description, this.jobTitle, this.jobYears, this.email);
         // Act and Assert
         assertTrue(this.validEmployee.equals(validEmployee2));
     }
@@ -133,14 +153,14 @@ class EmployeeTest {
     @Test
     public void testNotEqualsFalse() {
         // Arrange
-        Employee validEmployee2 = new Employee(firstName + "test", lastName, description, jobTitle, jobYears);
+        Employee validEmployee2 = new Employee(this.firstName + "test", this.lastName, this.description, this.jobTitle, this.jobYears, this.email);
         // Act and Assert
         assertFalse(this.validEmployee.equals(validEmployee2) || validEmployee2.equals(validEmployee));
     }
 
     @Test
     public void testHashCodeTrue() {
-        Employee validEmployee2 = new Employee(firstName, lastName, description, jobTitle, jobYears);
+        Employee validEmployee2 = new Employee(this.firstName, this.lastName, this.description, this.jobTitle, this.jobYears, this.email);
         // Act and Assert
         assertEquals(validEmployee.hashCode(), validEmployee2.hashCode());
     }
@@ -148,7 +168,7 @@ class EmployeeTest {
     @Test
     public void testHashCodeFalse() {
         // Arrange
-        Employee validEmployee2 = new Employee(firstName + "test", lastName, description, jobTitle, jobYears);
+        Employee validEmployee2 = new Employee(this.firstName + "test", this.lastName, this.description, this.jobTitle, this.jobYears, this.email);
         // Act and Assert
         assertNotEquals(validEmployee.hashCode(), validEmployee2.hashCode());
     }
@@ -286,6 +306,32 @@ class EmployeeTest {
     }
 
     @Test
+    public void testSetEmailThrowsExceptionWhenEmailIsNull() {
+        // Act and Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            validEmployee.setEmail(null);
+        });
+    }
+
+    @Test
+    public void testSetEmailThrowsExceptionWhenEmailIsEmpty() {
+        // Arrange
+        String email = "";
+        // Act and Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            validEmployee.setEmail(email);
+        });
+    }
+
+    @Test
+    public void testSetEmailWithValidParameters() {
+        // Act and Assert
+        assertDoesNotThrow(() -> {
+            validEmployee.setEmail(email);
+        });
+    }
+
+    @Test
     public void testToString() {
         // Arrange
         String expected = "Employee{" +
@@ -294,7 +340,8 @@ class EmployeeTest {
             ", lastName='" + validEmployee.getLastName() + '\'' +
             ", description='" + validEmployee.getDescription() + '\'' +
             ", jobTitle='" + validEmployee.getJobTitle() + '\'' +
-            ", jobYears=" + validEmployee.getJobYears() +
+            ", jobYears='" + validEmployee.getJobYears() + '\'' +
+            ", email='" + validEmployee.getEmail() + '\'' +
             '}';
         // Act and Assert
         assertEquals(expected, validEmployee.toString());
