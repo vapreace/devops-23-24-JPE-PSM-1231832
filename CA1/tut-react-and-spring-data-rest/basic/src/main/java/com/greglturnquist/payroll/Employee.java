@@ -39,7 +39,7 @@ public class Employee {
 	private Employee() {}
 
 	public Employee(String firstName, String lastName, String description, String jobTitle, int jobYears, String email) {
-		if (!validStringParameters(firstName) || !validStringParameters(lastName) || !validStringParameters(description) || !validStringParameters(jobTitle) || !validJobYears(jobYears) || !validStringParameters(email)) {
+		if (!validStringParameters(firstName) || !validStringParameters(lastName) || !validStringParameters(description) || !validStringParameters(jobTitle) || !validJobYears(jobYears) || !validEmail(email)) {
 			throw new IllegalArgumentException("Invalid parameters");
 		}
 		this.firstName = firstName;
@@ -138,7 +138,7 @@ public class Employee {
 	}
 
 	public void setEmail(String email) {
-		if (!validStringParameters(email)) {
+		if (!validEmail(email)) {
 			throw new IllegalArgumentException("Invalid parameters");
 		}
 		this.email = email;
@@ -163,6 +163,10 @@ public class Employee {
 
 	private boolean validJobYears(int x) {
 		return x >= 0;
+	}
+
+	private boolean validEmail(String email) {
+		return email != null && email.contains("@");
 	}
 }
 // end::code[]
