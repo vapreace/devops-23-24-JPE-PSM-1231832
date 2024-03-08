@@ -1,7 +1,13 @@
 # CA1: Version Control with Git: Technical Report
 
+**Author:** Inês Lemos
+**Date:** 08/03/2024
+**Discipline:** DevOps
+**Course:** SWitCH DEV
+**Institution:** Instituto Superior de Engenharia/Instituto Politécnico do Porto
+
 ## Introduction
-This report details the "Version Control with Git" assignment for our DevOps course. The assignment is divided into two parts: first, using basic version control without branches, and second, implementing branching for new features and bug fixes. I also explore an alternative to Git, Subversion (SVN), comparing its features and potential application to this assignment's goals.
+This report details the "Version Control with Git" assignment for the DevOps discipline. The assignment is divided into two parts: `Part 1`, using basic version control without branches, and `Part 2`, implementing branching for new features and bug fixes. The outcomes of this project are detailed in the `Final Results` section, which visually demonstrates the evolved state of the application post the integration of all new functionalities. I also explore an `Alternative Solution` to Git, Subversion (SVN), comparing its features and potential application to this assignment's goals.
 
 ## Environment Setup
 To begin, I used the previously created repository. The project is based on a Tutorial React.js and Spring Data REST application, which I placed in a designated folder for this assignment, named `CA1`.
@@ -82,8 +88,7 @@ public void setJobYears(int jobYears) {
 - **app.js**: The React components within `app.js` were modified to support the display of the new `jobYears` field within the employee list. The `EmployeeList` and `Employee` components now include a column for "Job Years" in the rendered table, allowing users to view the number of years an employee has been with the company alongside their other details.
 
 5. **Debug the server and client parts of the solution.**
-After completing the development and unit testing of the new `jobYears` field in the `Employee` class, I dedicated time to meticulously analyze both the server and client-side code of our application. This in-depth code review was aimed at ensuring that the new feature integrates flawlessly with existing functionalities and adheres to our application's architectural and coding standards.
-During this process, I focused on understanding the data flow and interaction patterns between the server and client components, particularly how the new `jobYears` data is managed and presented throughout the system. This comprehensive analysis allowed me to confirm the correctness of the implementation and validate that the addition of `jobYears` would not introduce regressions or disrupt the user experience.
+After verifying the `jobYears` field's integration, I ran the application using `./mvnw spring-boot:run` to test its real-time functionality at `http://localhost:8080/`. This step was crucial for hands-on testing of the feature within the application's interface, ensuring its seamless operation and compatibility with existing functionalities. Concurrently, I conducted a thorough code review to check data handling on the server side and the accurate representation of `jobYears` on the client side, guaranteeing the feature's correctness and maintaining high code quality.
 
 7. **End of the assignment**
 Once satisfied with the stability and performance of the new feature, I committed the changes to the repository with a descriptive message outlining the enhancements. Following this, the updated code was pushed to the remote server to share the advancements with the team and maintain the project's collaborative workflow. To mark this significant update, I tagged the commit with `v1.2.0`, following the semantic versioning pattern adopted for the project. At the end of the assignment, I markes the repository with the tag `ca1-part1`.
@@ -109,7 +114,7 @@ git checkout email-field
 git branch
 ```
 3. **Integration and Testing of the Email Field**
-The process of adding support for the email field in the application and ensuring robust validation closely mirrored the approach taken with the `jobYears` field in Part 1. The following outlines the key steps taken and highlights the new code introduced as well as the pertinent Git commands that facilitated this development phase.
+The process of adding support for the email field in the application and ensuring robust validation closely mirrored the approach taken with the `jobYears` field in Part 1. The following outlines the key steps taken.
 	- **Code Implementation**: Similar to the previous feature development, I extended the `Employee` class to include an `email` field along with its getter and setter methods. This involved updating data models, forms, and views to accommodate the new field, ensuring it was fully integrated into the application's frontend and backend.
 	- **Unit Testing**: Following the established pattern, I wrote comprehensive unit tests to verify the correct creation of Employee instances with the new email field and to enforce validation rules, such as non-null and non-empty values for the email attribute.
 	- **Debugging**: The server and client parts of the application underwent thorough debugging to identify and rectify any issues arising from the addition of the email field, ensuring seamless operation and user experience.
@@ -148,20 +153,39 @@ private boolean validEmail(String email) {
 6. **End of the assignment**
 After implementing the fix and conducting thorough testing to confirm its effectiveness, the changes were merged into the master branch, and the application version was updated to `v1.3.1` to indicate the minor fix. This version increment highlights the continuous improvement of the application's functionality and reliability. At the end of the assignment I marked the repository with the tag `ca1-part2`.
 
+## Final Results
 
-## Alternative Solution Analysis
+**Implementation**
+Following the implementation of all the new features, the final state of the application is illustrated below:
+![enter image description here](https://i.postimg.cc/bNH2HsD1/Screenshot-2024-03-08-at-09-16-43.png)
+In our application's employee model, the fields "First Name", "Last Name", and "Description" were pre-existing components of the model and have not been modified in the scope of this project. The development enhancements began with the addition of the "Job Title" field in a prior exercise. Subsequently, during Part 1 of this CA1, the "Job Years" field was introduced to track the duration of employees' tenure within the company. The latest enhancement, implemented in Part 2 of CA1, involved adding the "Email" field, further augmenting our employee data model with contact information.
+
+**Branches**
+The image below showcases the current branches within the repository, as revealed by executing the `git branch` command. 
+<img  src="https://i.postimg.cc/W4rsZp7x/Screenshot-2024-03-08-at-11-19-49.png"  width="400">
+
+The subsequent image illustrates the chronological sequence of branches, highlighting the most recent contributions to the repository.
+<img  src="https://i.postimg.cc/zX8mtSFt/Screenshot-2024-03-08-at-11-33-33.png"  width="400">
+
+**Tags**
+Below is a visual depiction of the project's tags, generated using the `git tag` command.
+<img  src="https://i.postimg.cc/zBb2v3SR/Screenshot-2024-03-08-at-11-25-23.png"  width="200">
+
+This section provided a comprehensive view of the application's evolution through the addition of new features, the strategic use of branching for development, and the marking of significant milestones with tags. The visual representations of the repository's branches and tags not only demonstrate the practical application of version control concepts but also highlight the collaborative and iterative nature of software development. 
+
+## Alternative Solution
 
 In seeking an alternative to Git for version control, Subversion (SVN) offers a distinct approach with its centralized model, contrasting Git's decentralized nature. This section compares SVN to Git in terms of version control features and describes how SVN could be utilized to achieve the goals set forth in this assignment.
 
-### Comparison to Git
 
-1.  **Centralized vs. Decentralized**: Unlike Git's distributed architecture, SVN operates on a centralized model, where a single repository serves as the source of truth. This can simplify administration and access control but might limit flexibility and offline work capabilities.
-    
-2.  **Versioning Model**: SVN tracks changes on a per-file basis and assigns incremental version numbers to the entire repository for each commit. Git, on the other hand, treats changes as snapshots of the entire repository, offering a more holistic view of the project's history.
-    
-3.  **Branching and Merging**: Git's lightweight branching and powerful merging capabilities are well-suited for handling diverse and concurrent development streams. SVN supports branching and merging as well, but these operations can be more cumbersome due to its centralized nature and the way it handles file copies.
-    
-4.  **Binary Files Handling**: SVN handles binary files more gracefully than Git, storing deltas for binary changes, which can be advantageous for projects with significant binary assets.
+| Feature              | SVN                                                                                             | Git                                                                                                                    |
+|----------------------|-------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------|
+| Architecture         | Centralized model, with a single repository as the authoritative source.                         | Distributed architecture, enabling multiple full-version repositories for enhanced redundancy and collaboration.       |
+| Versioning Model     | Utilizes a linear, per-file versioning system, assigning incremental version numbers per commit. | Adopts a snapshot-based approach, encapsulating the state of the entire repository at each commit for comprehensive tracking. |
+| Branching and Merging| Facilitates branch creation and merging, though the process may require more manual oversight.   | Provides efficient branching and merging capabilities, ideal for parallel development workflows.                        |
+| Binary Files Handling| Efficiently manages binary file changes through delta storage, optimizing for large binary assets.| Stores complete binary files per change, which may increase repository size but ensures ease of access to all versions.    |
+
+
     
 
 ### Utilizing SVN for the Assignment
@@ -181,6 +205,7 @@ By adopting SVN and tailoring its features to the assignment's requirements, a c
 
 ## Conclusion
 
-Completing the "Version Control with Git" assignment has significantly broadened my understanding of version control systems and their role in software development. The first part of the assignment reinforced the foundation of version control, focusing on direct modifications to the master branch and the essential practice of committing and tagging. The progression to the second part, which introduced branching, allowed for a deeper dive into more complex scenarios involving feature additions and bug fixes, demonstrating the importance of isolating changes for clearer project history and easier management.
-The exploration of SVN as an alternative to Git provided  insights into different version control paradigms. By comparing SVN's centralized approach to Git's distributed model, I gained a comprehensive perspective on how various systems can be tailored to meet project requirements, highlighting the adaptability required in DevOps practices.
+Completing the "Version Control with Git" assignment has significantly broadened my understanding of version control systems and their role in software development. The `Part 1` of the assignment reinforced the foundation of version control, focusing on direct modifications to the master branch and the essential practice of committing and tagging. The progression to the `Part 2`, which introduced branching, allowed for a deeper dive into more complex scenarios involving feature additions and bug fixes, demonstrating the importance of isolating changes for clearer project history and easier management.
+The `Final Results` segment of this report encapsulates the tangible outcomes of this learning experience, showcasing the application's enhanced functionality through the successive addition of new features. This visual portrayal underscores the practical application of version control principles in real-world software development scenarios.
+The exploration of SVN as an `Alternative Solution` to Git provided  insights into different version control paradigms. By comparing SVN's centralized approach to Git's distributed model, I gained a comprehensive perspective on how various systems can be tailored to meet project requirements, highlighting the adaptability required in DevOps practices.
 This assignment not only enhanced my technical skills in using Git and understanding SVN but also highlighted the essential role of version control in facilitating collaborative development environments, ensuring code integrity, and managing project evolution efficiently.
