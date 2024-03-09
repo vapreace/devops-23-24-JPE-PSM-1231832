@@ -15,5 +15,7 @@ Each directory within this repository corresponds to a specific class assignment
 ## Contact
 
 **Student:** Inês Lemos
-**Program:** SWitCH DEV  
+
+**Program:** SWitCH DEV 
+
 **Institution:** Instituto Superior de Engenharia/ Instituto Politécnico do Porto
