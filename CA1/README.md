@@ -56,6 +56,7 @@ git add .
 git commit -m "add readme"
 ```
 Reflecting on the process, I now recognize the importance of a clear initial commit message, such as "initial commit". This practice sets a clear starting point for the repository's history and is considered a good standard in version control workflows.
+
 **Pushing to Remote:** Finally, I pushed my initial commit to the GitHub repository, officially starting the version history of my assignments in a remote location.
 ```shell
 git push -u origin master
@@ -113,14 +114,6 @@ public Employee(String firstName, String lastName, String description, String jo
     this.jobYears = jobYears;  
 }
 
-private boolean validStringParameters(String x) {  
-  return x != null && !x.isEmpty();  
-}  
-
-private boolean validJobYears(int x) {  
-  return x >= 0;  
-}
-
 public int getJobYears() {  
   return jobYears;  
 }
@@ -131,6 +124,27 @@ public void setJobYears(int jobYears) {
     }  
   this.jobYears = jobYears;  
 }
+
+private boolean validStringParameters(String x) {
+    return x != null && !x.isEmpty();
+}
+
+private boolean validJobYears(int x) {
+    return x >= 0;
+}
+
+@Override
+public String toString() {
+    return "Employee{" +
+            "id=" + id +
+            ", firstName='" + firstName + '\'' +
+            ", lastName='" + lastName + '\'' +
+            ", description='" + description + '\'' +
+            ", jobTitle='" + jobTitle + '\'' +
+            ", jobYears='" + jobYears + '\'' +
+            '}';
+}
+
 ```
 - **EmployeeTest.java**: To ensure the reliability of the new `jobYears` field, this file was updated to include unit tests. Key aspects of the testing include:
 	- Initialization: Employed `@BeforeEach` for setting up a consistent test environment with a valid `Employee` instance.
@@ -138,8 +152,113 @@ public void setJobYears(int jobYears) {
 	- Positive Scenarios: Confirmed that valid inputs result in successful object creation, with no exceptions thrown, ensuring the `Employee` class functions as intended under correct usage.
 	- Equality and Hashing: Verified the correct implementation of `equals` and `hashCode` methods, essential for accurate object comparison.
 	- String Representation: Tested the `toString` method to ensure it accurately represents `Employee` object details, facilitating easier debugging and logging.
-- **DatabaseLoader.java**: This class, responsible for pre-loading the database with sample data, was altered to include `jobYears` information for the sample employees. This change ensured that the application could demonstrate the functionality of the new field right from the start.
+
+Here are some examples of the tests implemented:
+```java
+
+
+class EmployeeTest {
+    private String firstName;
+    private String lastName;
+    private String description;
+    private String jobTitle;
+    private int jobYears;
+    private Employee validEmployee;
+
+    @BeforeEach
+    public void setUp() {
+        firstName = "John";
+        lastName = "Doe";
+        description = "Developer";
+        jobTitle = "Software Engineer";
+        jobYears = 5;
+        validEmployee = new Employee(firstName, lastName, description, jobTitle, jobYears);
+    }
+    
+    @Test
+    public void testEmployeeConstructorWithValidParameters() {
+        // Act and Assert
+        assertDoesNotThrow(() -> {
+            new Employee(this.firstName, this.lastName, this.description, this.jobTitle, this.jobYears);
+        });
+    }
+
+    @Test
+    public void testEmployeeConstructorThrowsExceptionWhenFirstNameIsNull() {
+        // Act and Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Employee(null, this.lastName, this.description, this.jobTitle, this.jobYears, this.email);
+        });
+    }
+
+    @Test
+    public void testEmployeeConstructorThrowsExceptionWhenFirstNameIsEmpty() {
+        // Arrange
+        String firstName = "";
+        // Act and Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Employee(firstName, this.lastName, this.description, this.jobTitle, this.jobYears, this.email);
+        });
+    }
+
+    @Test
+    public void testEmployeeConstructorThrowsExceptionWhenJobYearsIsNegative() {
+        // Arrange
+        int jobYears = -1;
+        // Act and Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Employee(this.firstName, this.lastName, this.description, this.jobTitle, jobYears, this.email);
+        });
+    }
+}
+```
+- **DatabaseLoader.java**: This class, responsible for pre-loading the database with sample data, was altered to include `jobYears` information for the sample employees. This change ensured that the application could demonstrate the functionality of the new field right from the start. Below is the code snippet illustrating the modification made to `DatabaseLoader` to include `jobYears` for the sample employees:
+```java
+@Override
+	public void run(String... strings) throws Exception { // <4>
+		this.repository.save(new Employee("Frodo", "Baggins", "ring bearer", "explorer", 3));
+	}
+```
 - **app.js**: The React components within `app.js` were modified to support the display of the new `jobYears` field within the employee list. The `EmployeeList` and `Employee` components now include a column for "Job Years" in the rendered table, allowing users to view the number of years an employee has been with the company alongside their other details.
+The following code snippet illustrates the changes made to `app.js` to incorporate the `jobYears` field into the application's frontend:
+```javascript
+class EmployeeList extends React.Component{
+    render() {
+        const employees = this.props.employees.map(employee =>
+            <Employee key={employee._links.self.href} employee={employee}/>
+        );
+        return (
+            <table>
+                <tbody>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Description</th>
+                        <th>Job Title</th>
+                        <th>Job Years</th>
+                    </tr>
+                    {employees}
+                </tbody>
+            </table>
+        )
+    }
+}
+```
+```javascript
+class Employee extends React.Component{
+    render() {
+        return (
+            <tr>
+                <td>{this.props.employee.firstName}</td>
+                <td>{this.props.employee.lastName}</td>
+                <td>{this.props.employee.description}</td>
+                <td>{this.props.employee.jobTitle}</td>
+                <td>{this.props.employee.jobYears}</td>
+            </tr>
+        )
+    }
+}
+```
 
 5. **Debug the server and client parts of the solution.**
 
@@ -157,7 +276,9 @@ Once satisfied with the stability and performance of the new feature, I committe
 -   The part concludes with tagging the master branch after successful merges to mark new versions of the application, showcasing effective branch management and integration in version control.
 
 ### Key Developments
-In the second part, the focus shifted towards utilizing branch-based development to enhance the application's features and fix any existing bugs while ensuring that the master branch remained stable for "publishing" the stable versions of the Tutorial React.js and Spring Data REST Application. The steps included:
+In the second part, the focus shifted towards utilizing branch-based development to enhance the application's features and fix any existing bugs, ensuring that the master branch remained stable for "publishing" the stable versions of the Tutorial React.js and Spring Data REST Application.
+
+The steps for adding new features and fixing bugs are similar to those described in Part 1. Therefore, to avoid repetition, I will not show all the code again. The main difference here is the use of branches. Here are the main steps:
 
 1. **Start using the master branch**
 
@@ -229,12 +350,12 @@ The image below showcases the current branches within the repository, as reveale
 <img  src="https://i.postimg.cc/hvmrcHhv/Screenshot-2024-03-08-at-20-21-55.png"  width="300">
 
 The subsequent image illustrates the chronological sequence of branches, highlighting the most recent contributions to the repository.
-Through this assignment, I learned the importance of using branches for isolating changes related to specific features or fixes. This practice not only keeps the main codebase stable but also provides a clear and organized history of changes.
 
 <img  src="https://i.postimg.cc/zX8mtSFt/Screenshot-2024-03-08-at-11-33-33.png"  width="300">
 
-### Tags
+Through this assignment, I learned the importance of using branches for isolating changes related to specific features or fixes. This practice not only keeps the main codebase stable but also provides a clear and organized history of changes.
 
+### Tags
 Below is a visual depiction of the project's tags, generated using the `git tag` command.
 
 <img  src="https://i.postimg.cc/50CvC8Jk/Screenshot-2024-03-08-at-20-22-19.png"  width="170">
@@ -242,15 +363,17 @@ Below is a visual depiction of the project's tags, generated using the `git tag`
 The use of tags taught me how to mark specific points in the project's history as significant. This is crucial for tracking the progress of the project over time and for quickly reverting to previous versions if necessary.
 
 ### Issue Tracking
-During the development process, two issues were created on GitHub to track and manage problems that arose. These issues were names "Create README.md file" and "Explore an alternative solution to GIT". They were then resolved and closed by including `fixes #1` and `fixes #2` in the commit messages. This practice not only provides a clear history of the problem and its solution, but also automatically closes the issue once the commit is pushed to the repository.
+During the development process, two issues were created on GitHub to track and manage problems that arose. These issues were then resolved and closed by including `fixes #1` and `fixes #2` in the commit messages. This practice not only provides a clear history of the problem and its solution, but also automatically closes the issue once the commit is pushed to the repository.
+Below is a visual representation of the issues created and closed during the assignment:
+
+<img  src="https://i.postimg.cc/13WncKhF/Screenshot-2024-03-09-at-20-09-53.png"  width="300">
+
 Issues can serve multiple purposes in a project. They can be used to track bugs, feature requests, or general tasks. They can also be assigned to specific team members, have labels for easy searching, and can be linked to specific commits or pull requests.
 In future assignments, the aim is to utilize issues throughout the entire development process. This will help in managing tasks, tracking progress, and facilitating collaboration, especially when working in a team setting.
-
 
 This section provided a comprehensive view of the application's evolution through the addition of new features, the strategic use of branching for development, and the marking of significant milestones with tags. The visual representations of the repository's branches and tags not only demonstrate the practical application of version control concepts but also highlight the collaborative and iterative nature of software development. The inclusion of issue tracking further underscores the importance of maintaining a clear and organized project history, ensuring that all developments are well-documented and traceable.
 
 ## Alternative Solution
-
 In seeking an alternative to Git for version control, Subversion (SVN) offers a distinct approach with its centralized model, contrasting Git's decentralized nature. This section compares SVN to Git in terms of version control features and describes how SVN could be utilized to achieve the goals set forth in this assignment.
 
 ### Comparison of SVN and Git
@@ -264,21 +387,14 @@ In seeking an alternative to Git for version control, Subversion (SVN) offers a 
     
 
 ### Utilizing SVN for the Assignment
-
 To apply SVN in the context of this assignment, the following design considerations could be made:
-
 1.  **Repository Setup**: The `svnadmin create /path/to/repository` command can be used to establish a centralized SVN repository to host the Tutorial React.js and Spring Data REST application. This ensures that all version-controlled files are centrally managed.
-
 2.  **Branching Strategy**: Although SVN branches are more heavyweight than Git branches, they can still be utilized for developing new features or fixes. For instance, branches like `features/email-field` and `fixes/fix-invalid-email` can be created using the `svn copy ^/trunk ^/branches/branch-name -m "Creating a new branch"` command. This parallels the Git workflow outlined in the assignment.
-
 3.  **Committing and Tagging**: Continuous integration of changes can involve committing to the appropriate SVN branch using the `svn commit -m "message"` command. SVN tags can be used to mark stable versions of the application with the `svn copy ^/trunk ^/tags/tag-name -m "Creating a new tag"` command, similar to Git's tagging system.
-
 4.  **Merging and Deployment**: Once features or fixes are completed and tested, they can be merged back into the trunk (SVN's default branch) using the `svn merge ^/branches/branch-name` command. The repository can be tagged to reflect new versions, such as `v1.3.1` for bug fixes, using the tagging command mentioned above.
-
 By adopting SVN and tailoring its features to the assignment's requirements, a solution comparable to Git's workflow can be achieved. This demonstrates the versatility and applicability of different version control systems in software development projects.
 
 ## Conclusion
-
 Completing the `Version Control with Git` assignment has significantly broadened my understanding of version control systems and their role in software development. The `Part 1` of the assignment reinforced the foundation of version control, focusing on direct modifications to the master branch and the essential practice of committing and tagging. The progression to the `Part 2`, which introduced branching, allowed for a deeper dive into more complex scenarios involving feature additions and bug fixes, demonstrating the importance of isolating changes for clearer project history and easier management.
 The `Final Results` segment of this report encapsulates the tangible outcomes of this learning experience, showcasing the application's enhanced functionality through the successive addition of new features. This visual portrayal underscores the practical application of version control principles in real-world software development scenarios. The use of GitHub issues for problem tracking and management was also introduced and utilized, providing a clear history of problems and their solutions. This practice demonstrated the versatility and applicability of issues in software development projects.
 The exploration of SVN as an `Alternative Solution` to Git provided  insights into different version control paradigms. By comparing SVN's centralized approach to Git's distributed model, I gained a comprehensive perspective on how various systems can be tailored to meet project requirements, highlighting the adaptability required in DevOps practices.
