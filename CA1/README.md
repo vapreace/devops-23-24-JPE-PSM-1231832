@@ -3,13 +3,13 @@
 
 **Author:** Inês Lemos
 
-**Date:** 08/03/2024
+**Date:** 11/03/2024
 
 **Discipline:** DevOps
 
-**Course:** SWitCH DEV
+**Program:** SWitCH DEV
 
-**Institution:** Instituto Superior de Engenharia/Instituto Politécnico do Porto
+**Institution:** Instituto Superior de Engenharia/ Instituto Politécnico do Porto
 
 ## Table of Contents
 
@@ -32,19 +32,20 @@
 - [Conclusion](#conclusion)
 
 ## Introduction
-This report details the "Version Control with Git" assignment for the DevOps discipline. The assignment is divided into two parts: **Part 1**, using basic version control without branches, and **Part 2**, implementing branching for new features and bug fixes. The outcomes of this project are detailed in the **Final Results** section, which visually demonstrates the evolved state of the application post the integration of all new functionalities and resolution of issues. I also explore an **Alternative Solution** to Git, Subversion (SVN), comparing its features and potential application to this assignment's goals.
+This report details the **Version Control with Git** assignment for the DevOps discipline. The assignment is divided into two parts: **Part 1**, using basic version control without branches, and **Part 2**, implementing branching for new features and bug fixes. The outcomes of this project are detailed in the **Final Results** section, which visually demonstrates the evolved state of the application after the integration of all new functionalities and resolution of issues. I also explore an **Alternative Solution** to Git, Subversion (SVN), comparing its features and potential application to this assignment's goals.
 
 ## Environment Setup
 Initially, I cloned an existing repository containing the Tutorial React.js and Spring Data REST application to have a local copy of the tutorial project. Following this, I set up my own repository to host the class assignments and ensure that all developments were tracked under my version control.
+
 **Creating My Repository:** I created a new folder on my local machine for the DevOps class assignments and initialized it as a Git repository. This was the first step in establishing my workspace for the project.
 ```shell
 mkdir ~/myDevOpsRepo
 cd ~/myDevOpsRepo
 git init
 ```
-**Copying the Tutorial Application:** To incorporate the tutorial application into my project, I copied its contents into my newly created repository. This ensured that I had all the necessary starting files for the assignment within my own version control system.
+**Copying the Tutorial Application:** To integrate the tutorial application into my project, its contents were copied into my repository. This action ensured that all essential files for the assignment were available within my version control system.
 ```shell
-cp -r ~/tutorial/* .
+cp -r ~/tutorial ~/myDevOpsRepo
 ```
 **Linking to GitHub:** With the tutorial application copied into my repository, I then linked my local repository to a new GitHub repository. This connection allowed me to push my changes to a remote server, facilitating backup and sharing.
 ```shell
@@ -79,7 +80,7 @@ In the first part, all development was done in the master branch. The steps incl
 These commands were used to create a new directory named `CA1` and copy the tutorial directory recursively to `CA1`:
 ```shell
 mkdir CA1
-cp -r path/to/tutorial/* CA1/
+cp -r ~/myDevOpsRepo/tutorial ~/myDevOpsRepo/CA1
 ```
 2. **Commit the changes (and push them).**
 
@@ -387,15 +388,41 @@ In seeking an alternative to Git for version control, Subversion (SVN) offers a 
     
 
 ### Utilizing SVN for the Assignment
-To apply SVN in the context of this assignment, the following design considerations could be made:
-1.  **Repository Setup**: The `svnadmin create /path/to/repository` command can be used to establish a centralized SVN repository to host the Tutorial React.js and Spring Data REST application. This ensures that all version-controlled files are centrally managed.
-2.  **Branching Strategy**: Although SVN branches are more heavyweight than Git branches, they can still be utilized for developing new features or fixes. For instance, branches like `features/email-field` and `fixes/fix-invalid-email` can be created using the `svn copy ^/trunk ^/branches/branch-name -m "Creating a new branch"` command. This parallels the Git workflow outlined in the assignment.
-3.  **Committing and Tagging**: Continuous integration of changes can involve committing to the appropriate SVN branch using the `svn commit -m "message"` command. SVN tags can be used to mark stable versions of the application with the `svn copy ^/trunk ^/tags/tag-name -m "Creating a new tag"` command, similar to Git's tagging system.
-4.  **Merging and Deployment**: Once features or fixes are completed and tested, they can be merged back into the trunk (SVN's default branch) using the `svn merge ^/branches/branch-name` command. The repository can be tagged to reflect new versions, such as `v1.3.1` for bug fixes, using the tagging command mentioned above.
-By adopting SVN and tailoring its features to the assignment's requirements, a solution comparable to Git's workflow can be achieved. This demonstrates the versatility and applicability of different version control systems in software development projects.
+The following sections detail how SVN could be utilized in alignment with the assignment's activities:
+
+**Initial Repository Setup and Import:** The first step involves establishing a centralized SVN repository to host the Tutorial React.js and Spring Data REST application, centralizing all version-controlled files:
+```shell
+# Create a new SVN repository
+svnadmin create /path/to/svn_repository
+
+# Import the Tutorial application into the SVN repository
+cd /path/to/TutorialReactSpringDataREST
+svn import . file:///path/to/svn_repository/my_project -m "Initial import"
+```
+**Feature Development and Branch Management:** With the repository in place, development begins by creating branches for new features, mirroring the branching strategy used in Git:
+```shell
+# Create a branch for the new feature
+svn copy file:///path/to/svn_repository/my_project/trunk file:///path/to/svn_repository/my_project/branches/feature-branch -m "Creating feature branch"
+```
+**Continuous Integration: Committing and Tagging:** As changes are made, they are committed to the appropriate branches, ensuring a detailed history of development. Stable versions are marked using SVN tags:
+```shell
+# Commit changes within the feature branch
+cd /path/to/working_copy/feature-branch
+svn commit -m "Implemented new feature"
+
+# Tag a stable release
+svn copy file:///path/to/svn_repository/my_project/trunk file:///path/to/svn_repository/my_project/tags/v1.0 -m "Tagging version 1.0"
+```
+**Merging Features and Preparing for Deployment:** Upon completion of feature development and thorough testing, features can be merged back into the trunk, and the repository is prepared for deployment:
+```shell
+# Merge the feature branch back into the trunk
+svn merge --reintegrate file:///path/to/svn_repository/my_project/branches/feature-branch /path/to/working_copy/trunk
+svn commit -m "Merged feature branch into trunk"
+```
+By tailoring SVN's features to fit the requirements of this assignment, a workflow similar to Git's can be achieved, showcasing the adaptability of version control systems in software development environments.
 
 ## Conclusion
-Completing the `Version Control with Git` assignment has significantly broadened my understanding of version control systems and their role in software development. The `Part 1` of the assignment reinforced the foundation of version control, focusing on direct modifications to the master branch and the essential practice of committing and tagging. The progression to the `Part 2`, which introduced branching, allowed for a deeper dive into more complex scenarios involving feature additions and bug fixes, demonstrating the importance of isolating changes for clearer project history and easier management.
-The `Final Results` segment of this report encapsulates the tangible outcomes of this learning experience, showcasing the application's enhanced functionality through the successive addition of new features. This visual portrayal underscores the practical application of version control principles in real-world software development scenarios. The use of GitHub issues for problem tracking and management was also introduced and utilized, providing a clear history of problems and their solutions. This practice demonstrated the versatility and applicability of issues in software development projects.
-The exploration of SVN as an `Alternative Solution` to Git provided  insights into different version control paradigms. By comparing SVN's centralized approach to Git's distributed model, I gained a comprehensive perspective on how various systems can be tailored to meet project requirements, highlighting the adaptability required in DevOps practices.
+Completing the **Version Control with Git** assignment has significantly broadened my understanding of version control systems and their role in software development. The **Part 1** of the assignment reinforced the foundation of version control, focusing on direct modifications to the master branch and the essential practice of committing and tagging. The progression to the **Part 2**, which introduced branching, allowed for a deeper dive into more complex scenarios involving feature additions and bug fixes, demonstrating the importance of isolating changes for clearer project history and easier management.
+The **Final Results** segment of this report encapsulates the tangible outcomes of this learning experience, showcasing the application's enhanced functionality through the successive addition of new features. This visual portrayal underscores the practical application of version control principles in real-world software development scenarios. The use of GitHub issues for problem tracking and management was also introduced and utilized, providing a clear history of problems and their solutions. This practice demonstrated the versatility and applicability of issues in software development projects.
+The exploration of SVN as an **Alternative Solution** to Git provided  insights into different version control paradigms. By comparing SVN's centralized approach to Git's distributed model, I gained a comprehensive perspective on how various systems can be tailored to meet project requirements, highlighting the adaptability required in DevOps practices.
 This assignment not only enhanced my technical skills in using Git and understanding SVN but also highlighted the essential role of version control in facilitating collaborative development environments, ensuring code integrity, and managing project evolution efficiently.
