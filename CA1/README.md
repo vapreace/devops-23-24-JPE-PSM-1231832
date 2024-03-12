@@ -3,7 +3,7 @@
 
 **Author:** Inês Lemos
 
-**Date:** 11/03/2024
+**Date:** 12/03/2024
 
 **Discipline:** DevOps
 
@@ -95,7 +95,7 @@ git push
 Following the versioning pattern outlined in the assignment, major.minor.revision, I tagged the initial setup as `v1.1.0` and subsequently pushed this tag to the remote repository:
 ```shell
 git tag -a v1.1.0 -m "v1.1.0"
-push origin v1.1.0
+git push origin v1.1.0
 ```
 4. **Develop a new feature to add a new field to the application.**
 
