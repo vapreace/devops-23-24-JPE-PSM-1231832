@@ -135,7 +135,7 @@ After implementing the task, I tested its functionality by executing `./gradlew 
 
 Although the backup folder is not present in the remote repository, it has been successfully generated in my local development environment. This is evidenced by the presence of the backup folder in my local file system after executing the backup task in Gradle, as shown in the screenshot below.
 
-<img  src="https://i.postimg.cc/gcqVTz1M/backup.png"  width="250">
+<img  src="https://i.postimg.cc/KvQc3BLP/backup.png"  width="200">
 
 
 The addition of the backup task to the Gradle build script has improved the project's resilience by facilitating easy and reliable code backups.
@@ -164,7 +164,7 @@ Below is a screenshot of the terminal following the task's completion, showcasin
 Although the zip file is not present in the remote repository, it has been successfully generated in my local development environment.
 This is evidenced by the presence of the zip file in my local file system after executing the archive task in Gradle.
 
-<img  src="https://i.postimg.cc/y8LxgdWb/zipFile.png"  width="250">
+<img  src="https://i.postimg.cc/bwTnJZYW/zipFile.png"  width="200">
 
 ## Conclusion
 
