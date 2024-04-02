@@ -37,28 +37,28 @@ I then integrated the project into my Integrated Development Environment (IDE) w
 These initial steps established a solid foundation, enabling me to smoothly proceed with the subsequent tasks outlined in the assignment.
 
 ## Gradle Basic Demo
-The Gradle Basic Demo provided a practical exercise in working with a multithreaded chat server capable of handling multiple clients simultaneously.
+The Gradle Basic Demo provided a practical exercise in working with a multi-threaded chat server capable of handling multiple clients simultaneously.
 
 **Build Process:**
 
 To prepare the demo for execution, I executed `./gradlew build` from the root directory of the project. This command compiled the source code and packaged it into an executable .jar file. The screenshot below confirms the successful build process.
 
-<img  src="https://i.postimg.cc/1tPzm4JX/Screenshot-2024-03-18-at-19-07-42.png"  width="300">
+<img  src="https://i.postimg.cc/1tPzm4JX/Screenshot-2024-03-18-at-19-07-42.png"  width="1000">
 
 **Server Startup:**
 
 Next, I launched the chat server using the command `java -cp build/libs/basic_demo-0.1.0.jar basic_demo.ChatServerApp 59001`. The following screenshot shows the server running and waiting for client connections.
 
-<img  src="https://i.postimg.cc/QxMHK9sW/Screenshot-2024-03-18-at-19-09-15.png"  width="300">
+<img  src="https://i.postimg.cc/QxMHK9sW/Screenshot-2024-03-18-at-19-09-15.png"  width="1000">
 
 **Client Connections:**
 
 For the client side, I initiated connections to the chat server by executing `/gradlew runClient`, ensuring each client connected to localhost on port 59001. The build.gradle file was set up to allow easy modifications for different connection settings. To illustrate the server's ability to manage multiple clients, I launched several client instances from different terminals.
 The screenshots below capture the active chat sessions, demonstrating the multi-client functionality in action.
 
-<img  src="https://i.postimg.cc/0N7Q17Gh/Screenshot-2024-03-18-at-17-30-29.png"  width="300">
+<img  src="https://i.postimg.cc/0N7Q17Gh/Screenshot-2024-03-18-at-17-30-29.png"  width="600">
 
-<img  src="https://i.postimg.cc/SxBsPg9W/Screenshot-2024-03-18-at-17-33-03.png"  width="300">
+<img  src="https://i.postimg.cc/SxBsPg9W/Screenshot-2024-03-18-at-17-33-03.png"  width="600">
 
 
 ## Add a new task
@@ -80,7 +80,7 @@ task runServer(type: JavaExec, dependsOn: classes) {
 
 To test the functionality of this addition, I executed the task using `./gradlew runServer` in the command line. The immediate feedback from the terminal confirmed the task's successful execution, as shown in the screenshot below, demonstrating the server's active status. This enhancement has notably streamlined our development process, making it more efficient by reducing the steps required to get the server up and running.
 
-<img  src="https://i.postimg.cc/NfPL6sfC/Screenshot-2024-03-18-at-17-50-30.png"  width="300">
+<img  src="https://i.postimg.cc/NfPL6sfC/Screenshot-2024-03-18-at-17-50-30.png"  width="600">
 
 This integration into our Gradle build script not only highlights the adaptability of Gradle as a build tool but also contributes significantly to our project's overall productivity by automating routine tasks.
 
@@ -114,7 +114,7 @@ public class AppTest {
 To execute the test, I ran the command `./gradlew test`.
 The screenshot below shows the terminal output after executing the command, indicating the test passed successfully.
 
-<img  src="https://i.postimg.cc/cLgCTpvx/Screenshot-2024-03-18-at-18-15-33.png"  width="300">
+<img  src="https://i.postimg.cc/cLgCTpvx/Screenshot-2024-03-18-at-18-15-33.png"  width="600">
 
 ## Add a new task of type Copy
 The next task involved adding a new task of type Copy to the `build.gradle` file , designed to create a backup of the source code, ensuring that a reliable recovery point is available in case of any unforeseen issues during development.
@@ -131,7 +131,12 @@ task backup(type: Copy) {
 
 After implementing the task, I tested its functionality by executing `./gradlew backup` from the command line. The task ran successfully, as evidenced by the terminal output captured in the screenshot below. This output confirms that the source code was successfully copied to the backup location, demonstrating the task's effectiveness in safeguarding the project's code.
 
-<img  src="https://i.postimg.cc/66c8QLsX/Screenshot-2024-03-18-at-18-26-53.png"  width="300">
+<img  src="https://i.postimg.cc/66c8QLsX/Screenshot-2024-03-18-at-18-26-53.png"  width="600">
+
+Although the backup folder is not present in the remote repository, it has been successfully generated in my local development environment. This is evidenced by the presence of the backup folder in my local file system after executing the backup task in Gradle, as shown in the screenshot below.
+
+<img  src="https://i.postimg.cc/gcqVTz1M/backup.png"  width="250">
+
 
 The addition of the backup task to the Gradle build script has improved the project's resilience by facilitating easy and reliable code backups.
 
@@ -154,7 +159,12 @@ task archive(type: Zip) {
 Upon defining the zip task, I executed it using the command ./gradlew zip. The successful execution of this task was confirmed by the terminal output, which indicated that the src directory had been successfully compressed into a ZIP archive.
 Below is a screenshot of the terminal following the task's completion, showcasing the successful archive creation.
 
-<img  src="https://i.postimg.cc/Wz5zfjm3/Screenshot-2024-03-18-at-18-37-46.png"  width="300">
+<img  src="https://i.postimg.cc/Wz5zfjm3/Screenshot-2024-03-18-at-18-37-46.png"  width="1000">
+
+Although the zip file is not present in the remote repository, it has been successfully generated in my local development environment.
+This is evidenced by the presence of the zip file in my local file system after executing the archive task in Gradle.
+
+<img  src="https://i.postimg.cc/y8LxgdWb/zipFile.png"  width="250">
 
 ## Conclusion
 
@@ -163,3 +173,5 @@ The automation of build processes, integration of unit tests, and execution of f
 The addition of new tasks to the `build.gradle` file showcased the extensibility of Gradle. The creation of tasks such as `runServer`, `backup`, and `archive` not only streamlined the development process but also improved the project's resilience and distribution capabilities.
 The integration of a unit test into the build process highlighted the importance of testing in software development and how Gradle facilitates this process.
 Overall, the knowledge and skills gained from this assignment have enhanced my understanding of Gradle and its role in software development. This experience will be beneficial in future projects, contributing to more efficient and reliable development workflows.
+
+[Back to Top](#ca2-part1-build-tools-with-gradle-technical-report)
