@@ -36,12 +36,9 @@ frontend {
 	}
 
 task copyJar(type: Copy) {
-	dependsOn build
-
-	from "$buildDir/libs"
-	into "$projectDir/dist"
-
-	include '*.jar'
+	dependsOn bootJar
+	from bootJar.outputs
+	into file("dist")
 }
 
 task cleanWebpack(type: Delete) {
