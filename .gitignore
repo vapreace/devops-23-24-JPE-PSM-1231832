@@ -409,6 +409,8 @@ $RECYCLE.BIN/
 ### Vagrant ###
 # General
 .vagrant/
+.vagrant
+*.war
 
 # Log files (if you are creating logs in debug mode, uncomment this)
 # *.log
