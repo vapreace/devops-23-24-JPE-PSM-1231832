@@ -220,7 +220,7 @@ if the Spring Boot application was running correctly. Below is a screenshot of t
 <img src="https://i.postimg.cc/MGZ7GHwv/Screenshot-2024-05-13-at-17-25-28.png" width="800"/>
 
 I also accessed the H2 console by visiting http://localhost:8082/h2-console and connected to the H2 database using the
-JDBC URL `jdbc:h2:tcp://192.168.33.11:9092/./jpadb`. Here's a snapshot of the H2 Login page, where I entered the
+JDBC URL `jdbc:h2:tcp://192.168.56.11:9092/./jpadb`. Here's a snapshot of the H2 Login page, where I entered the
 connection details:
 
 <img src="https://i.postimg.cc/rwwHB8HN/Screenshot-2024-05-13-at-17-25-42.png" width="800"/>
