@@ -11,11 +11,10 @@
 **Institution:** Instituto Superior de Engenharia/ Instituto Politécnico do Porto
 
 ## Table of Contents
-
-- [Table of Contents](#table-of-contents)
 - [Introduction](#introduction)
 - [Environment Setup](#environment-setup)
 - [Dockerfile - version 1](#dockerfile---version-1)
+- [Dockerfile - version 2](#dockerfile---version-2)
 - [Conclusion](#conclusion)
 
 ## Introduction
