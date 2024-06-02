@@ -20,7 +20,7 @@
 ## Introduction
 
 The primary goal of this assignment is to practice using Docker by creating Docker images and running containers with a
-chat application. This application was originally developed in CA2 and is available in a Bitbucket repository. By
+chat application. This application was originally developed in `CA2` and is available in a Bitbucket repository. By
 containerizing the chat server, we can ensure that it runs consistently across different environments. This assignment
 is divided into two versions:
 
@@ -31,9 +31,9 @@ is divided into two versions:
 
 ## Environment Setup
 
-To start working with Docker and the chat server from CA2, I first ensured that Docker was installed on my system.
+To start working with Docker and the chat server from `CA2`, I first ensured that Docker was installed on my system.
 Beside that, it is also necessary to have the chat server repository from Bitbucket. This repository contains the
-basic Gradle application developed in CA2. It's possible to clone the repository using the following command:
+basic Gradle application developed in `CA2`. It's possible to clone the repository using the following command:
 
 ```bash
 git clone https://bitbucket.org/pssmatos/gradle_basic_demo.git
