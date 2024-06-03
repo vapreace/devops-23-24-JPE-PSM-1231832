@@ -193,10 +193,6 @@ First, I listed all the Docker images to see their IDs using the following comma
 docker images
 ```
 
-Below is the output of the command, which shows the images created for the web and database services:
-
-<img src="https://i.postimg.cc/sXXC8Tqb/Screenshot-2024-06-02-at-22-10-48.png" alt="Docker images" width="600">
-
 This allowed me to identify the Image IDs for the images I wanted to tag and push.
 
 Next, I tagged the images with the correct repository name and tag. Using the Image IDs obtained from the previous step,
@@ -207,8 +203,9 @@ docker tag e0cf7b8ed2d9 ineslemos/part2-web:web
 docker tag ca111ad47479 ineslemos/part2-db:db
 ```
 
-These commands assigned the web tag to the part2-web image and the db tag to the part2-db image in my Docker Hub
-repository (ineslemos).
+These commands assigned the `web` tag to the `part2-web` image and the `db` tag to the `part2-db` image, which is shown in the output of the `docker images` command.
+
+<img src="https://i.postimg.cc/sXXC8Tqb/Screenshot-2024-06-02-at-22-10-48.png" alt="Docker images" width="600">
 
 Before pushing the images, I logged into my Docker Hub account with the command:
 
@@ -232,7 +229,8 @@ Below is a screenshot showing the successful push of the images to Docker Hub:
 
 ## Working with volumes
 
-To ensure that the database file is correctly placed in the volume, I used the docker-compose exec command to access the
+To ensure that the database file was correctly placed in the volume, I used the `docker-compose exec` command to 
+access the
 running db container and manually copy the necessary file:
 
 ```bash
@@ -246,12 +244,12 @@ cp /usr/src/app/h2-1.4.200.jar /usr/src/data-backup
 exit
 ```
 
-This command sequence enters the db container, copies the specified file to the volume directory, and then exits the
+This command sequence enters the `db` container, copies the specified file to the volume directory, and then exits the
 container shell. This ensures that the database file is backed up to the volume and persisted on the host.
 
 ## Alternative solution
 
-As an alternative deployment solution, I explored using Heroku to deploy the web application.
+As an alternative deployment solution, I explored using `Heroku` to deploy the web application.
 
 1. First, I created a Heroku account and installed the Heroku CLI on my local machine. I then logged in to my Heroku
    account using the command:
