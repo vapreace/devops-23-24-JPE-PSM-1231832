@@ -30,7 +30,7 @@ pipeline {
             steps {
                 dir('CA2/Part1/gradle_basic_demo') {
                     echo 'Archiving artifacts...'
-                    archiveArtifacts artifacts: 'build/libs/*.war', allowEmptyArchive: true
+                    archiveArtifacts artifacts: 'build/libs/*.jar', allowEmptyArchive: true
                 }
             }
         }
