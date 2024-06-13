@@ -453,5 +453,5 @@ gradle-app.setting
 # Ignore directories for backups in any part of the project
 backup/
 
-### Built directories ###
-**/src/main/resources/static/built/
+## Dockerfile
+/Dockerfile
