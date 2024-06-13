@@ -17,7 +17,7 @@ pipeline {
         }
         stage('Create Dockerfile') {
             steps {
-                dir('ca2/part2/react-and-spring-data-rest-basic') {
+                dir('CA2/Part2/react-and-spring-data-rest-basic') {
                     echo 'Creating Dockerfile...'
                     script {
                         writeFile file: 'Dockerfile', text: '''
